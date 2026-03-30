@@ -1,0 +1,56 @@
+#the dimension of variables in dynamic
+dimension: 1
+
+# the F skeleton in dynamic
+skeleton_F:
+
+  num: 1000  #the number of skeleton
+  type: 'Simulation_F'  #the type of skeleton
+  fixed: False  #fixed expression whether or not
+  fixed_expr: None  #the fixed expression of skeleton
+  skeleton_detail:
+    max_len: 20  #the maximum length of skeleton
+    operators: "add:10,mul:10,sub:10,div:10,exp:1,ln:1,sqrt:1,pow2:1,pow3:1,pow4:1,sin:1,cos:1,tan:1,asin:1,acos:1,atan:1" #the operator types and probability of occurrence
+    max_ops: 5 #the maximum operators of skeleton
+    rewrite_functions: ""
+    variables: ["x_1_0","cm"] #the variables of skeleton (For calculation, variables and constants are placed together)
+    eos_index: 1
+    pad_index: 0
+    priori_leaf: []
+  const_detail:
+    num_of_sample: 4 #the number of sample per skeleton
+    repeat: 5 #the maximum attempts for sampling
+    constant_range: [-10, 10] #the value range of constant
+
+# the G skeleton in dynamic
+skeleton_G:
+  num: 1000
+  type: 'Simulation_G'
+  fixed: False
+  fixed_expr: None
+  skeleton_detail:
+    max_len: 20
+    operators: "add:10,mul:10,sub:10,div:10,exp:1,ln:1,sqrt:1,pow2:1,pow3:1,pow4:1,sin:1,cos:1,tan:1,asin:1,acos:1,atan:1" #the operator types and probability of occurrence
+    max_ops: 5
+    rewrite_functions: ""
+    variables: [ "x_1_0","x_2_0","cm" ]
+    eos_index: 1
+    pad_index: 0
+    priori_leaf: [ "x_1_0 - x_2_0", "x_2_0 - x_1_0", "x_1_0 + x_2_0", "x_1_0 * x_2_0", "x_1_0 / x_2_0", "x_2_0 / x_1_0"]
+  const_detail:
+    num_of_sample: 4
+    repeat: 5
+    constant_range: [ -10,10 ]
+
+# the topo in dynamic
+topo:
+  max_num: 100 # the number of nodes in topo
+  type_list: ["grid","random","power_law","small_world", "community"] # the type of topo "community"
+
+# the time in dynamic
+t:
+  start: 0  #the start of time
+  end: 2 #the end of time
+  inc: 0.01  #the inc of time
+# the initial value in dynamic
+resample_init_condition: False
