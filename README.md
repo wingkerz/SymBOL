@@ -1,92 +1,92 @@
 # SymBOL
 SymBOL: A Universal Symbolic Learner for Scientific Discovery Using Bayesian Optimization-Enhanced Large Language Models
-# 🚀 快速开始
+#  Quick Start
 
-## 1. 环境配置
+## 1. Environment Setup
 
-首先，请确保你已安装必要的依赖项。项目提供了 `yaml` 环境配置文件：
+First, make sure you have installed the required dependencies. The project provides a `yaml` environment configuration file:
 
 ```bash
-# 使用 conda 创建环境
+# Create environment using conda
 conda env create -f environment.yml
 
-# 激活环境
-conda activate [你的环境名称]
+# Activate the environment
+conda activate [your_environment_name]
 ```
 
 ---
 
-## 2. 模型准备
+## 2. Model Preparation
 
-在使用之前，需要配置 **Embedding 模型** 和 **大语言模型（LLM）**。
+Before running the project, you need to configure both the **Embedding model** and the **LLM**.
 
-### Embedding 模型
+### Embedding Model
 
-1. 下载预训练的 Embedding 模型。
-2. 将模型文件存放到 `model/` 文件夹中。
-3. 在 `main.py` 中更新模型对应的存放路径。
+1. Download the pretrained embedding model.
+2. Place the model files into the `model/` directory.
+3. Update the model path in `main.py` and `use_localmodel.py`.
 
-### LLM 模型配置
+### LLM Configuration
 
-项目支持 **本地部署模型** 及 **在线 API**：
+The project supports both **local deployment** and **online API-based models**:
 
-#### 本地开源模型
+#### Local Open-source Models
 
-1. 将模型文件下载至 `model/` 文件夹。
-2. 在 `use_localmodel.py` 中修改模型加载路径。
+1. Download the model files into the `model/` directory.
+2. Modify the model loading path in `use_localmodel.py`.
 
-#### 闭源模型（API）
+#### Closed-source Models (API)
 
-若使用 GPT 等在线模型：
+If you use online models such as GPT:
 
-1. 在 `use_gpt.py` 中更新 API Endpoint。
-2. 填入你的 API Key。
-
----
-
-# 📊 数据准备
-
-项目针对不同的应用场景提供了两种数据处理方式：
-
-## A. 低维一般符号回归
-
-项目采用 **LSR-transformer** 数据集。
-
-* **测试数据**：`data/` 文件夹下已内置生成的测试数据
-* **切换用例**：修改 `screen_pretrain_knowledge_eq.py` 中的 `case_name` 即可更换测试例子
-* **自定义数据**：如需测试其他数据集，请参考现有格式生成相应实验数据
+1. Update the API Endpoint in `use_gpt.py`.
+2. Provide your API Key.
 
 ---
 
-## B. 高维网络动力学
+# Data Preparation
 
-以 **Lotka-Volterra** 情景为例，通过模拟生成网络动力学数据。
+The project provides two data processing pipelines for different application scenarios:
 
-### 数据生成
+## A. Low-dimensional General Symbolic Regression
 
-运行以下脚本生成数据：
+The project uses the **LSR-transformer dataset**.
+
+* **Test data**: Pre-generated test datasets are available in the `data/` directory.
+* **Switch test cases**: Modify the `case_name` in `screen_pretrain_knowledge_eq.py` to select different examples.
+* **Custom datasets**: To test on other datasets, follow the existing format to generate corresponding experimental data.
+
+---
+
+## B. High-dimensional Network Dynamics
+
+Taking the **Lotka–Volterra** scenario as an example, network dynamic data is generated via simulation.
+
+### Data Generation
+
+Run the following script to generate data:
 
 ```bash
 python generate_data.py
 ```
 
-### 配置修改
+### Configuration
 
-在 `configs/` 文件夹下的配置文件中，可以自定义：
+In the configuration files located in the `configs/` directory, you can customize:
 
-* 网络拓扑结构
-* 积分时间步长
-* 时间区间
+* Network topology structure
+* Integration time steps
+* Time range
 
-### 方程参考
+### Reference Equations
 
-`data/dataset_test3.csv` 中包含了 **Lotka-Volterra** 情景对应的具体方程。
+The file `data/dataset_test3.csv` contains the equations corresponding to the **Lotka–Volterra** scenario.
 
 ---
 
-# 💻 运行与测试
+# Running Experiments
 
-完成模型配置和数据准备后，运行主程序进行高维网络动力学符号回归测试：
+After configuring the models and preparing the data, run the main script to perform symbolic regression on high-dimensional network dynamics:
 
 ```bash
 python main.py
@@ -94,18 +94,6 @@ python main.py
 
 ---
 
-# 📁 项目结构（建议）
 
-```
-project/
-│
-├── configs/
-├── data/
-├── model/
-├── generate_data.py
-├── main.py
-├── use_gpt.py
-├── use_localmodel.py
-└── screen_pretrain_knowledge_eq.py
-```
+
 
