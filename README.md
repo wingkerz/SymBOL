@@ -46,8 +46,10 @@ If you use online models such as GPT:
 Modify the `prompts_path` in the main function to your local path, for example:
 `prompts_path = "/home/SymBOL/prompts/SR/gen_prompts_2.txt"`
 
-In the prompt, the {Operators list} specifies the operators that may appear in the generated expressions.
-For example: {+,-,*,/,exp,log,sin,cos}
+In the prompt, the **Operators list** specifies the operators that may appear in the generated expressions. It can be flexibly configured according to the specific task.
+
+For example: {+,-,*,/,^,sqrt,exp,log,sin,cos} (Low-dimensional)
+{+,-,*,/,^,exp} (High-dimensional)
 
 
 ---
