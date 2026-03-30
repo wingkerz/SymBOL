@@ -48,7 +48,7 @@ If you use online models such as GPT:
 
 The project provides two data processing pipelines for different application scenarios:
 
-## A. Low-dimensional General Symbolic Regression
+## A. Low-dimensional Symbolic Regression
 
 The project uses the **LSR-transformer dataset**.
 
