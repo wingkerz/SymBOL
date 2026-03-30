@@ -41,6 +41,8 @@ If you use online models such as GPT:
 
 1. Update the API Endpoint in `use_gpt.py`.
 2. Provide your API Key.
+3. Replace all occurrences of `use_localmodel` with `use_gpt` in the functions **`gen_use_llm_separate`**, **`suggest_use_llm`**, as well as in the main function.
+
 
 ---
 
