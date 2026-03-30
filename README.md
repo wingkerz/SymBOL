@@ -92,6 +92,24 @@ In the configuration files located in the `configs/Simulation_config.yaml` direc
 
 The file `data/dataset_test3.csv` contains the equations corresponding to the **Lotka–Volterra** scenario.
 
+Run the following script to generate data:
+
+```bash
+python generate_data.py
+```
+
+Run the following script to generate **high-order** data:
+
+ ```bash
+python generate_data_high_order.py
+ ```
+
+ Run the following script to generate **nonlinear** data:
+
+ ```bash
+ python generate_data_noliner.py
+ ```
+
 ---
 
 # Running Experiments
