@@ -52,7 +52,7 @@ The project provides two data processing pipelines for different application sce
 
 The project uses the **LSR-transformer dataset** (https://huggingface.co/datasets/nnheui/llm-srbench).
 
-* **Test data**: Pre-generated test datasets are available in the `data/` directory.
+* **Train data**: Pre-generated train datasets are available in the `data/` directory.
 * **Switch test cases**: Modify the `case_name` in `screen_pretrain_knowledge_eq.py` to select different examples.
 * **Custom datasets**: To test on other datasets, follow the existing format to generate corresponding experimental data.
 
@@ -72,7 +72,7 @@ python generate_data.py
 
 ### Configuration
 
-In the configuration files located in the `configs/` directory, you can customize:
+In the configuration files located in the `configs/Simulation_config.yaml` directory, you can customize:
 
 * Network topology structure
 * Integration time steps
