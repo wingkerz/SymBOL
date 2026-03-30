@@ -10,7 +10,7 @@ import torch
 import torch.nn as nn
 from torch_scatter import scatter_sum
 from data_create.NetworkSystemInstances_new import GeneralDynamics
-from data_create.lib.Topo import Topo
+from data_create.lib.Topo_high import Topo
 from data_create.lib.InitCondition import InitCondition
 from string_create.Creation import Creation
 if torch.cuda.is_available():
