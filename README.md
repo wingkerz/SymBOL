@@ -43,6 +43,9 @@ If you use online models such as GPT:
 2. Provide your API Key.
 3. Replace all occurrences of `use_localmodel` with `use_gpt` in the functions **`gen_use_llm_separate`**, **`suggest_use_llm`**, as well as in the main function.
 
+Modify the `prompts_path` in the main function to your local path, for example:
+`prompts_path = "/home/SymBOL/prompts/SR/gen_prompts_2.txt"`
+
 
 ---
 
