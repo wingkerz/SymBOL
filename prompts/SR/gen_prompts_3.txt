@@ -1,0 +1,23 @@
+The variables in the equations : {variables}. It is forbidden to generate any variables other than the specified ones.
+Operators list : [+, -, *, /, ^, sqrt, exp, sin, cos](The operators for the equations can only be chosen from the operators list.)
+Replace constants with the number 1.
+Please analyze the following generation requirements step by step:
+    1. Operator Diversity: Each equation must use at least 3 different operators (chosen from Operators list)
+    2. The generated equations need to satisfy the structure of rational functions, and they should be obtained through the addition, subtraction, multiplication, and division of polynomials.
+        Keep the polynomial in factored form. 
+    3. The numerator should not exceed three terms in length, maintain simple variable relationships, and avoid exceeding two types of operators.
+    4. Fraction Structure Specifications ("/"): The denominator must be enclosed in parentheses and contain at least two terms, preferably including the constant term 1. ((x0)/(x1*(x0 - 1)), (x0)/(x1*(x0 + 1) + 1))
+    5. Structural Diversity: Each new equation must differ from previously generated equations in at least two structural aspects (e.g., operator combinations, fraction placement).
+Generated equations must be diverse, fully exploring combinations of variables ({variables}) and operators in operators list, as well as all possibilities! You don't need to output anything extra. Please list 5 generated equations in the following JSON list format:
+
+
+
+
+
+
+
+
+
+
+
+

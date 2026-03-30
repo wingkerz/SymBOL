@@ -1,0 +1,8 @@
+As a mathematician and scientist, please distill and summarize the variable relationships and equation forms of fx in an interesting and diverse manner to guide the better generation of equations. Below is fx:
+fx: {fx_list}
+The variable in fx is: ['x0','x1','x2','x3','x4','x5']
+Operators list :[+, -, *, /, ^, sqrt, exp](The operators for the equations can only be chosen from the operators list.)
+The variable in fx may represent different physical meanings. Please summarize the patterns of the equation and suggestions for possible improvements from the fields of mathematics, physics, chemistry, and biology:
+For example:
+   1.  The variables x0 and x1 may have a multiplicative relationship to represent the state of a gas in terms of its temperature, pressure, and volume.
+You only need to output 4 suggestions in JSON format (only letters, numbers, and punctuation marks are allowed in the suggestions). Output only text in txt format, do not output any other special characters!
