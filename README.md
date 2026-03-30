@@ -60,7 +60,7 @@ The project uses the **LSR-transformer dataset** (https://huggingface.co/dataset
 
 ---
 
-## B. High-dimensional Network Dynamics
+## B. High-dimensional Network Dynamics Symbolic Regression
 
 Taking the **Lotka–Volterra** scenario as an example, network dynamic data is generated via simulation.
 
