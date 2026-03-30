@@ -1,0 +1,12 @@
+As a mathematician, please distill and summarize the patterns of fx and gx in an interesting and diverse manner to guide the better generation of network dynamics equations, where fx and gx represent the self-dynamics and interaction dynamics, respectively.
+Below, I will provide you with two lists (in Python list format):
+One list is for fx: {fx_list}.
+The other list is for gx: {gx_list}.
+The variable in fx is only [x0]. The variables in gx are [x0, x1].
+My ultimate goal is to summarize existing patterns to generate equations with more diverse based on your suggestions.
+The equations fx and gx are used to describe infectious disease models.
+The suggestions should include:
+    For fx and gx, summarize the physical and mathematical laws of network dynamics. Such as:
+    1.The interaction dynamics gx describes the dynamic relationship of cooperation and competition among variables in a complex system through the balance between the product-based synergy and the summation-based inhibition of the variables.
+Output only text in txt format, do not output any other special characters! You only need to output 3 suggestions in JSON format (only letters, numbers, and punctuation marks are allowed in the suggestions).
+

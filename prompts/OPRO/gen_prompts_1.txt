@@ -1,0 +1,16 @@
+The variables in the equations : {variables}. It is forbidden to generate any variables other than the specified ones.
+The variables {variables} represent the angles in a coupled oscillator system.
+Operators list :   [+, -, *, /] (The operators for the equations can only be chosen from the operators list.)
+Replace constants with the number 1.
+Please analyze the following generation requirements step by step:
+    1. Operator Diversity: Each equation must use at least 2 different operators (chosen from Operators list)
+    2. The generated equations need to satisfy the structure of rational functions, and they should be obtained through the addition, subtraction, multiplication, and division of polynomials.
+       Keep the polynomial in factored form. 
+Generated equations must be diverse, fully exploring combinations of variables ({variables}) and operators in operators list, as well as all possibilities! You don't need to output anything extra. Please list 5 generated equations in the following JSON list format:
+
+
+
+
+
+
+

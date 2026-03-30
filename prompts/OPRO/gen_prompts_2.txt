@@ -1,0 +1,17 @@
+Below, I will provide you with a list that contains the best equations currently in the population:
+{fx_list}.
+To generate equations that are different from those in the given lists (with different operator or variable combinations) and ensure they are not completely identical to any existing equation!
+The variables in the equations : {variables}. It is forbidden to generate any variables other than the specified ones.
+The variables {variables} represent the angles in a coupled oscillator system.
+Operators list :  [+, -, *, /, ^, exp] (The operators for the equations can only be chosen from the operators list.)
+Replace constants with the number 1.
+Please analyze the following generation requirements step by step:
+    1. Operator Diversity: Each equation must use at least 2 different operators (chosen from Operators list). 
+       Generate an equation no less than 25 characters and no more than 50 characters!
+    2. The generated equations need to satisfy the structure of rational functions, and they should be obtained through the addition, subtraction, multiplication, and division of polynomials.
+       Transcendental functions can be nested outside polynomial functions. Keep the polynomial in factored form.
+    3. Fraction Structure Specifications ("/"): The denominator must be enclosed in parentheses and contain at least two terms, preferably including the constant term 1. 
+{suggest_text}
+{suggest_list}
+You don't need to output anything extra. Use your imagination as much as possible! Generated equations must be diverse, fully exploring combinations of variables and operators, as well as all possibilities! Please list 5 equations in the following JSON list format:
+
