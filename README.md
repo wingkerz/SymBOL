@@ -50,7 +50,7 @@ The project provides two data processing pipelines for different application sce
 
 ## A. Low-dimensional Symbolic Regression
 
-The project uses the **LSR-transformer dataset**.
+The project uses the **LSR-transformer dataset** (https://huggingface.co/datasets/nnheui/llm-srbench).
 
 * **Test data**: Pre-generated test datasets are available in the `data/` directory.
 * **Switch test cases**: Modify the `case_name` in `screen_pretrain_knowledge_eq.py` to select different examples.
