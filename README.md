@@ -119,6 +119,8 @@ After configuring the models and preparing the data, run the main script to perf
 ```bash
 python main_high_SR.py
 ```
+For the high-order scenario, the {variables_list} used to generate g needs to be modified accordingly.
+For the nonlinear scenario, the LLM needs to generate s one additional time.
 The low-dimensional symbolic regression task can be executed using:
 ```bash
 python main_low_SR.py
