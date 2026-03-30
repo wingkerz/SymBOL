@@ -95,9 +95,12 @@ After configuring the models and preparing the data, run the main script to perf
 
 ```bash
 python main_high_SR.py
-The low-dimensional symbolic regression task can be executed using main_low_SR.py.
-In the prompt, the Operators list specifies the operators that may appear in the generated expressions.
 ```
+The low-dimensional symbolic regression task can be executed using 
+```bash
+python main_low_SR.py
+```
+
 
 ---
 
