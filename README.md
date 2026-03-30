@@ -94,7 +94,7 @@ The file `data/dataset_test3.csv` contains the equations corresponding to the **
 After configuring the models and preparing the data, run the main script to perform symbolic regression on high-dimensional network dynamics:
 
 ```bash
-python main.py
+python main_high_SR.py
 ```
 
 ---
