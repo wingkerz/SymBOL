@@ -47,9 +47,9 @@ Modify the `prompts_path` in the main function to your local path, for example:
 `prompts_path = "/home/SymBOL/prompts/SR/gen_prompts_2.txt"`
 
 In the prompt, the **Operators list** specifies the operators that may appear in the generated expressions. It can be flexibly configured according to the specific task.
-
-For example: {+,-,*,/,^,sqrt,exp,log,sin,cos} (Low-dimensional)
-{+,-,*,/,^,exp} (High-dimensional)
+For example:
+{+,-,*,/,^,sqrt,exp,log,sin,cos} (Low-dimensional tasks)
+{+,-,*,/,^,exp} (High-dimensional tasks)
 
 
 ---
