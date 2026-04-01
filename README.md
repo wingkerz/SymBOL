@@ -22,7 +22,7 @@ Before running the project, you need to configure both the **Embedding model** a
 
 ### Embedding Model
 
-1. Download the pretrained embedding model.
+1. Download the pretrained embedding model(For example : https://hf-mirror.com/nvidia/NV-Embed-v2).
 2. Place the model files into the `model/` directory.
 3. Update the model path in `main.py` and `use_localmodel.py`.
 
