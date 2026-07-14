@@ -1,5 +1,5 @@
 # SymBOL
-SymBOL: A Universal Symbolic Learner for Scientific Discovery Using Bayesian Optimization-Enhanced Large Language Models (TPAMI 2026)
+SymBOL: A General-Purpose Symbolic Learner for Scientific Discovery Using Bayesian Optimization-Enhanced Large Language Models (TPAMI 2026)
 #  Quick Start
 
 ## 1. Environment Setup
