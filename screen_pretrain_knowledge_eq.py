@@ -286,207 +286,349 @@ sampling_const = partial(random.uniform, min_const, max_const)
 # ------------------------------------
 # build psets of f and g based on dim
 # ------------------------------------
+# def build_psets(dim=1):
+#     # ---------- f -----------------
+#     pset_f = gp.PrimitiveSet("F", dim, prefix='x')
+#     pset_f.addPrimitive(lambda x, y: np.nan_to_num(np.add(x, y), nan=0),
+#                         2, name='Add')
+#     pset_f.addPrimitive(lambda x, y: np.nan_to_num(np.subtract(x, y), nan=0),
+#                         2, name='Sub')
+#     pset_f.addPrimitive(lambda x, y: np.nan_to_num(np.multiply(x, y), nan=0),
+#                         2, name='Mul')
+#     pset_f.addPrimitive(lambda x, y: np.nan_to_num(np.divide(x, y), nan=0),
+#                         2, name='Div')
+#     pset_f.addPrimitive(lambda x: np.nan_to_num(np.exp(x), nan=0),
+#                         1, name='exp')
+#     pset_f.addPrimitive(lambda x: np.nan_to_num(np.sin(x), nan=0),
+#                         1, name='sin')
+#     pset_f.addPrimitive(lambda x: np.nan_to_num(np.cos(x), nan=0),
+#                         1, name='cos')
+#     pset_f.addPrimitive(lambda x: np.nan_to_num(np.tan(x), nan=0),
+#                         1, name='tan')
+#     pset_f.addPrimitive(lambda x: np.nan_to_num(np.abs(x), nan=0),
+#                         1, name='Abs')
+#     pset_f.addPrimitive(lambda x: np.nan_to_num(np.log(x), nan=0),
+#                         1, name='log')
+#     pset_f.addPrimitive(lambda x, y: np.nan_to_num(np.power(x, y), nan=0),
+#                        2, name='Pow')
+#     pset_f.addPrimitive(lambda x: np.nan_to_num(np.tanh(x), nan=0), 1, name='tanh')
+#     pset_f.addPrimitive(lambda x: np.nan_to_num(np.sinh(x), nan=0), 1, name='sinh')
+#     pset_f.addPrimitive(lambda x: np.nan_to_num(np.cosh(x), nan=0), 1, name='cosh')
+#     pset_f.addPrimitive(lambda x: np.nan_to_num(np.arcsin(np.clip(x, -1, 1)), nan=0), 1, name='arcsin')
+#     pset_f.addPrimitive(lambda x: np.nan_to_num(np.arccos(np.clip(x, -1, 1)), nan=0), 1, name='arccos')
+#     pset_f.addPrimitive(lambda x: np.nan_to_num(np.arctan(x), nan=0), 1, name='arctan')
+#     pset_f.addPrimitive(lambda x: np.nan_to_num(1 / np.cos(x), nan=0, posinf=0, neginf=0), 1, name='sec')
+#     pset_f.addPrimitive(lambda x: np.nan_to_num(1/np.sin(x), nan=0, posinf=0, neginf=0), 1, name='csc')
+#     pset_f.addPrimitive(lambda x: np.nan_to_num(1/np.tan(x), nan=0, posinf=0, neginf=0), 1, name='cot')
+#     pset_f.addTerminal(np.e, name='e')  # 添加指数 e
+#     pset_f.addTerminal(np.pi, name='pi') #添加常数pi
+#     pset_f.addEphemeralConstant('C',
+#                                 sampling_const)
+
+#     # ---------- g -----------------
+#     #高阶
+#     # pset_g = gp.PrimitiveSet("G", int(dim * 3), prefix='x')
+#     pset_g = gp.PrimitiveSet("G", int(dim * 2), prefix='x')
+
+#     pset_g.addPrimitive(lambda x, y: np.nan_to_num(np.add(x, y), nan=0),
+#                         2, name='Add')
+#     pset_g.addPrimitive(lambda x, y: np.nan_to_num(np.subtract(x, y), nan=0),
+#                         2, name='Sub')
+#     pset_g.addPrimitive(lambda x, y: np.nan_to_num(np.multiply(x, y), nan=0),
+#                         2, name='Mul')
+#     pset_g.addPrimitive(lambda x, y: np.nan_to_num(np.divide(x, y), nan=0),
+#                         2, name='Div')
+#     pset_g.addPrimitive(lambda x: np.nan_to_num(np.exp(x), nan=0),
+#                         1, name='exp')
+#     pset_g.addPrimitive(lambda x: np.nan_to_num(np.sin(x), nan=0),
+#                         1, name='sin')
+#     pset_g.addPrimitive(lambda x: np.nan_to_num(np.cos(x), nan=0),
+#                         1, name='cos')
+#     pset_g.addPrimitive(lambda x: np.nan_to_num(np.tan(x), nan=0),
+#                         1, name='tan')
+#     pset_g.addPrimitive(lambda x: np.nan_to_num(np.abs(x), nan=0),
+#                         1, name='Abs')
+#     pset_g.addPrimitive(lambda x: np.nan_to_num(np.log(x), nan=0),
+#                         1, name='log')
+#     pset_g.addPrimitive(lambda x, y: np.nan_to_num(np.power(x, y)),
+#                        2, name='Pow')
+#     pset_g.addPrimitive(lambda x: np.nan_to_num(np.tanh(x), nan=0), 1, name='tanh')
+#     pset_g.addPrimitive(lambda x: np.nan_to_num(np.sinh(x), nan=0), 1, name='sinh')
+#     pset_g.addPrimitive(lambda x: np.nan_to_num(np.cosh(x), nan=0), 1, name='cosh')
+#     pset_g.addPrimitive(lambda x: np.nan_to_num(np.arcsin(np.clip(x, -1, 1)), nan=0), 1, name='arcsin')
+#     pset_g.addPrimitive(lambda x: np.nan_to_num(np.arccos(np.clip(x, -1, 1)), nan=0), 1, name='arccos')
+#     pset_g.addPrimitive(lambda x: np.nan_to_num(np.arctan(x), nan=0), 1, name='arctan')
+#     pset_g.addPrimitive(lambda x: np.nan_to_num(1 / np.cos(x), nan=0, posinf=0, neginf=0), 1, name='sec')
+#     pset_g.addPrimitive(lambda x: np.nan_to_num(1/np.sin(x), nan=0, posinf=0, neginf=0), 1, name='csc')
+#     pset_g.addPrimitive(lambda x: np.nan_to_num(1/np.tan(x), nan=0, posinf=0, neginf=0), 1, name='cot')
+#     pset_g.addTerminal(np.e, name='e')  # 添加指数 e
+#     pset_g.addTerminal(np.pi, name='pi')
+#     pset_g.addEphemeralConstant('C',
+#                                 sampling_const)
+
+#     pset = (pset_f, pset_g)
+
+#     return pset_f, pset_g, pset
+# def build_psets_noliner(dim=1):
+#     # ---------- f -----------------
+#     pset_f = gp.PrimitiveSet("F", dim, prefix='x')
+
+#     pset_f.addPrimitive(lambda x, y: np.nan_to_num(np.add(x, y), nan=0),
+#                         2, name='Add')
+#     pset_f.addPrimitive(lambda x, y: np.nan_to_num(np.subtract(x, y), nan=0),
+#                         2, name='Sub')
+#     pset_f.addPrimitive(lambda x, y: np.nan_to_num(np.multiply(x, y), nan=0),
+#                         2, name='Mul')
+#     pset_f.addPrimitive(lambda x, y: np.nan_to_num(np.divide(x, y), nan=0),
+#                         2, name='Div')
+#     pset_f.addPrimitive(lambda x: np.nan_to_num(np.exp(x), nan=0),
+#                         1, name='exp')
+#     pset_f.addPrimitive(lambda x: np.nan_to_num(np.sin(x), nan=0),
+#                         1, name='sin')
+#     pset_f.addPrimitive(lambda x: np.nan_to_num(np.cos(x), nan=0),
+#                         1, name='cos')
+#     pset_f.addPrimitive(lambda x: np.nan_to_num(np.tan(x), nan=0),
+#                         1, name='tan')
+#     pset_f.addPrimitive(lambda x: np.nan_to_num(np.abs(x), nan=0),
+#                         1, name='Abs')
+#     pset_f.addPrimitive(lambda x: np.nan_to_num(np.log(x), nan=0),
+#                         1, name='log')
+#     pset_f.addPrimitive(lambda x, y: np.nan_to_num(np.power(x, y), nan=0),
+#                        2, name='Pow')
+#     pset_f.addPrimitive(lambda x: np.nan_to_num(np.tanh(x), nan=0), 1, name='tanh')
+#     pset_f.addPrimitive(lambda x: np.nan_to_num(np.sinh(x), nan=0), 1, name='sinh')
+#     pset_f.addPrimitive(lambda x: np.nan_to_num(np.cosh(x), nan=0), 1, name='cosh')
+#     # === 互补三角函数 ===
+#     pset_f.addPrimitive(lambda x: np.nan_to_num(1 / np.tan(x), nan=0, posinf=0, neginf=0), 1, name='cot')
+#     pset_f.addPrimitive(lambda x: np.nan_to_num(1 / np.cos(x), nan=0, posinf=0, neginf=0), 1, name='sec')
+#     pset_f.addPrimitive(lambda x: np.nan_to_num(1 / np.sin(x), nan=0, posinf=0, neginf=0), 1, name='csc')
+#     pset_f.addPrimitive(lambda x: np.nan_to_num(np.arctan(x), nan=0),
+#                         1, name='arctan')
+#     pset_f.addPrimitive(lambda x: np.nan_to_num(np.arcsin(x), nan=0),
+#                         1, name='arcsin')
+#     pset_f.addPrimitive(lambda x: np.nan_to_num(np.arccos(x), nan=0),
+#                         1, name='arccos')
+#     pset_f.addTerminal(np.e, name='e')  # 添加指数 e
+#     pset_f.addTerminal(np.pi, name='pi') #添加常数pi
+#     pset_f.addEphemeralConstant('C',
+#                                 sampling_const)
+
+#     # ---------- g -----------------
+#     pset_g = gp.PrimitiveSet("G", int(dim * 2), prefix='x')
+    
+#     pset_g.addPrimitive(lambda x, y: np.nan_to_num(np.add(x, y), nan=0),
+#                         2, name='Add')
+#     pset_g.addPrimitive(lambda x, y: np.nan_to_num(np.subtract(x, y), nan=0),
+#                         2, name='Sub')
+#     pset_g.addPrimitive(lambda x, y: np.nan_to_num(np.multiply(x, y), nan=0),
+#                         2, name='Mul')
+#     pset_g.addPrimitive(lambda x, y: np.nan_to_num(np.divide(x, y), nan=0),
+#                         2, name='Div')
+#     pset_g.addPrimitive(lambda x: np.nan_to_num(np.exp(x), nan=0),
+#                         1, name='exp')
+#     pset_g.addPrimitive(lambda x: np.nan_to_num(np.sin(x), nan=0),
+#                         1, name='sin')
+#     pset_g.addPrimitive(lambda x: np.nan_to_num(np.cos(x), nan=0),
+#                         1, name='cos')
+#     pset_g.addPrimitive(lambda x: np.nan_to_num(np.tan(x), nan=0),
+#                         1, name='tan')
+#     pset_g.addPrimitive(lambda x: np.nan_to_num(np.abs(x), nan=0),
+#                         1, name='Abs')
+#     pset_g.addPrimitive(lambda x: np.nan_to_num(np.log(x), nan=0),
+#                         1, name='log')
+#     pset_g.addPrimitive(lambda x, y: np.nan_to_num(np.power(x, y)),
+#                        2, name='Pow')
+#     pset_g.addPrimitive(lambda x: np.nan_to_num(np.tanh(x), nan=0), 1, name='tanh')
+#     pset_g.addPrimitive(lambda x: np.nan_to_num(np.sinh(x), nan=0), 1, name='sinh')
+#     pset_g.addPrimitive(lambda x: np.nan_to_num(np.cosh(x), nan=0), 1, name='cosh')
+#     pset_g.addTerminal(np.e, name='e')  # 添加指数 e
+#     pset_g.addTerminal(np.pi, name='pi')
+#     pset_g.addEphemeralConstant('C',
+#                                 sampling_const)
+
+#     pset_s = gp.PrimitiveSet("S", int(dim), prefix='x')
+#     # for i in range(dim * 2):
+#     #     xi = f"x{i}"
+#     #     pset_g.addPrimitive(lambda c, x: c * x, 2, name=f"{xi}_weighted")
+#     #     pset_g.addTerminal(i, name=xi)
+#     pset_s.addPrimitive(lambda x, y: np.nan_to_num(np.add(x, y), nan=0),
+#                         2, name='Add')
+#     pset_s.addPrimitive(lambda x, y: np.nan_to_num(np.subtract(x, y), nan=0),
+#                         2, name='Sub')
+#     pset_s.addPrimitive(lambda x, y: np.nan_to_num(np.multiply(x, y), nan=0),
+#                         2, name='Mul')
+#     pset_s.addPrimitive(lambda x, y: np.nan_to_num(np.divide(x, y), nan=0),
+#                         2, name='Div')
+#     pset_s.addPrimitive(lambda x: np.nan_to_num(np.exp(x), nan=0),
+#                         1, name='exp')
+#     pset_s.addPrimitive(lambda x: np.nan_to_num(np.sin(x), nan=0),
+#                         1, name='sin')
+#     pset_s.addPrimitive(lambda x: np.nan_to_num(np.cos(x), nan=0),
+#                         1, name='cos')
+#     pset_s.addPrimitive(lambda x: np.nan_to_num(np.tan(x), nan=0),
+#                         1, name='tan')
+#     pset_s.addPrimitive(lambda x: np.nan_to_num(np.abs(x), nan=0),
+#                         1, name='Abs')
+#     pset_s.addPrimitive(lambda x: np.nan_to_num(np.log(x), nan=0),
+#                         1, name='log')
+#     pset_s.addPrimitive(lambda x, y: np.nan_to_num(np.power(x, y)),
+#                         2, name='Pow')
+#     pset_s.addPrimitive(lambda x: np.nan_to_num(np.tanh(x), nan=0), 1, name='tanh')
+#     pset_s.addPrimitive(lambda x: np.nan_to_num(np.sinh(x), nan=0), 1, name='sinh')
+#     pset_s.addPrimitive(lambda x: np.nan_to_num(np.cosh(x), nan=0), 1, name='cosh')
+#     pset_s.addTerminal(np.e, name='e')  # 添加指数 e
+#     pset_s.addTerminal(np.pi, name='pi')
+#     pset_s.addEphemeralConstant('C',
+#                                 sampling_const)
+
+#     pset = (pset_f, pset_g, pset_s)
+
+#     return pset_f, pset_g, pset_s, pset
+
+
+real_pow = lambda x, y: np.where(
+    (x < 0) & (np.floor(y) != y) | ((x == 0) & (y <= 0)),
+    np.nan,
+    np.power(x, y, dtype=np.float64)
+)
+
+# 2. 严格实数除法：除以 0 生成的 inf 统一变为 NaN 触发死刑
+real_div = lambda x, y: np.where(y == 0, np.nan, np.divide(x, y, dtype=np.float64))
+
+# 3. 严格实数对数：<= 0 在实数域无定义，直接输出 NaN
+real_log = lambda x: np.where(x <= 0, np.nan, np.log(x, dtype=np.float64))
+
+# 4. 反三角函数超出 [-1, 1] 严格输出 NaN
+real_arcsin = lambda x: np.where(np.abs(x) > 1, np.nan, np.arcsin(x))
+real_arccos = lambda x: np.where(np.abs(x) > 1, np.nan, np.arccos(x))
+
+
 def build_psets(dim=1):
     # ---------- f -----------------
     pset_f = gp.PrimitiveSet("F", dim, prefix='x')
-    pset_f.addPrimitive(lambda x, y: np.nan_to_num(np.add(x, y), nan=0),
-                        2, name='Add')
-    pset_f.addPrimitive(lambda x, y: np.nan_to_num(np.subtract(x, y), nan=0),
-                        2, name='Sub')
-    pset_f.addPrimitive(lambda x, y: np.nan_to_num(np.multiply(x, y), nan=0),
-                        2, name='Mul')
-    pset_f.addPrimitive(lambda x, y: np.nan_to_num(np.divide(x, y), nan=0),
-                        2, name='Div')
-    pset_f.addPrimitive(lambda x: np.nan_to_num(np.exp(x), nan=0),
-                        1, name='exp')
-    pset_f.addPrimitive(lambda x: np.nan_to_num(np.sin(x), nan=0),
-                        1, name='sin')
-    pset_f.addPrimitive(lambda x: np.nan_to_num(np.cos(x), nan=0),
-                        1, name='cos')
-    pset_f.addPrimitive(lambda x: np.nan_to_num(np.tan(x), nan=0),
-                        1, name='tan')
-    pset_f.addPrimitive(lambda x: np.nan_to_num(np.abs(x), nan=0),
-                        1, name='Abs')
-    pset_f.addPrimitive(lambda x: np.nan_to_num(np.log(x), nan=0),
-                        1, name='log')
-    pset_f.addPrimitive(lambda x, y: np.nan_to_num(np.power(x, y), nan=0),
-                       2, name='Pow')
-    pset_f.addPrimitive(lambda x: np.nan_to_num(np.tanh(x), nan=0), 1, name='tanh')
-    pset_f.addPrimitive(lambda x: np.nan_to_num(np.sinh(x), nan=0), 1, name='sinh')
-    pset_f.addPrimitive(lambda x: np.nan_to_num(np.cosh(x), nan=0), 1, name='cosh')
-    pset_f.addPrimitive(lambda x: np.nan_to_num(np.arcsin(np.clip(x, -1, 1)), nan=0), 1, name='arcsin')
-    pset_f.addPrimitive(lambda x: np.nan_to_num(np.arccos(np.clip(x, -1, 1)), nan=0), 1, name='arccos')
-    pset_f.addPrimitive(lambda x: np.nan_to_num(np.arctan(x), nan=0), 1, name='arctan')
-    pset_f.addPrimitive(lambda x: np.nan_to_num(1 / np.cos(x), nan=0, posinf=0, neginf=0), 1, name='sec')
-    pset_f.addPrimitive(lambda x: np.nan_to_num(1/np.sin(x), nan=0, posinf=0, neginf=0), 1, name='csc')
-    pset_f.addPrimitive(lambda x: np.nan_to_num(1/np.tan(x), nan=0, posinf=0, neginf=0), 1, name='cot')
-    pset_f.addTerminal(np.e, name='e')  # 添加指数 e
-    pset_f.addTerminal(np.pi, name='pi') #添加常数pi
-    pset_f.addEphemeralConstant('C',
-                                sampling_const)
+    pset_f.addPrimitive(np.add, 2, name='Add')
+    pset_f.addPrimitive(np.subtract, 2, name='Sub')
+    pset_f.addPrimitive(np.multiply, 2, name='Mul')
+    pset_f.addPrimitive(real_div, 2, name='Div')
+    pset_f.addPrimitive(np.exp, 1, name='exp')
+    pset_f.addPrimitive(np.sin, 1, name='sin')
+    pset_f.addPrimitive(np.cos, 1, name='cos')
+    pset_f.addPrimitive(np.tan, 1, name='tan')
+    pset_f.addPrimitive(np.abs, 1, name='Abs')
+    pset_f.addPrimitive(real_log, 1, name='log')
+    pset_f.addPrimitive(real_pow, 2, name='Pow')
+    pset_f.addPrimitive(np.tanh, 1, name='tanh')
+    pset_f.addPrimitive(np.sinh, 1, name='sinh')
+    pset_f.addPrimitive(np.cosh, 1, name='cosh')
+    pset_f.addPrimitive(real_arcsin, 1, name='arcsin')
+    pset_f.addPrimitive(real_arccos, 1, name='arccos')
+    pset_f.addPrimitive(np.arctan, 1, name='arctan')
+    pset_f.addPrimitive(lambda x: real_div(1.0, np.cos(x)), 1, name='sec')
+    pset_f.addPrimitive(lambda x: real_div(1.0, np.sin(x)), 1, name='csc')
+    pset_f.addPrimitive(lambda x: real_div(1.0, np.tan(x)), 1, name='cot')
+    pset_f.addTerminal(np.e, name='e')
+    pset_f.addTerminal(np.pi, name='pi')
+    pset_f.addEphemeralConstant('C', sampling_const)
 
     # ---------- g -----------------
-    #高阶
-    # pset_g = gp.PrimitiveSet("G", int(dim * 3), prefix='x')
     pset_g = gp.PrimitiveSet("G", int(dim * 2), prefix='x')
-
-    pset_g.addPrimitive(lambda x, y: np.nan_to_num(np.add(x, y), nan=0),
-                        2, name='Add')
-    pset_g.addPrimitive(lambda x, y: np.nan_to_num(np.subtract(x, y), nan=0),
-                        2, name='Sub')
-    pset_g.addPrimitive(lambda x, y: np.nan_to_num(np.multiply(x, y), nan=0),
-                        2, name='Mul')
-    pset_g.addPrimitive(lambda x, y: np.nan_to_num(np.divide(x, y), nan=0),
-                        2, name='Div')
-    pset_g.addPrimitive(lambda x: np.nan_to_num(np.exp(x), nan=0),
-                        1, name='exp')
-    pset_g.addPrimitive(lambda x: np.nan_to_num(np.sin(x), nan=0),
-                        1, name='sin')
-    pset_g.addPrimitive(lambda x: np.nan_to_num(np.cos(x), nan=0),
-                        1, name='cos')
-    pset_g.addPrimitive(lambda x: np.nan_to_num(np.tan(x), nan=0),
-                        1, name='tan')
-    pset_g.addPrimitive(lambda x: np.nan_to_num(np.abs(x), nan=0),
-                        1, name='Abs')
-    pset_g.addPrimitive(lambda x: np.nan_to_num(np.log(x), nan=0),
-                        1, name='log')
-    pset_g.addPrimitive(lambda x, y: np.nan_to_num(np.power(x, y)),
-                       2, name='Pow')
-    pset_g.addPrimitive(lambda x: np.nan_to_num(np.tanh(x), nan=0), 1, name='tanh')
-    pset_g.addPrimitive(lambda x: np.nan_to_num(np.sinh(x), nan=0), 1, name='sinh')
-    pset_g.addPrimitive(lambda x: np.nan_to_num(np.cosh(x), nan=0), 1, name='cosh')
-    pset_g.addPrimitive(lambda x: np.nan_to_num(np.arcsin(np.clip(x, -1, 1)), nan=0), 1, name='arcsin')
-    pset_g.addPrimitive(lambda x: np.nan_to_num(np.arccos(np.clip(x, -1, 1)), nan=0), 1, name='arccos')
-    pset_g.addPrimitive(lambda x: np.nan_to_num(np.arctan(x), nan=0), 1, name='arctan')
-    pset_g.addPrimitive(lambda x: np.nan_to_num(1 / np.cos(x), nan=0, posinf=0, neginf=0), 1, name='sec')
-    pset_g.addPrimitive(lambda x: np.nan_to_num(1/np.sin(x), nan=0, posinf=0, neginf=0), 1, name='csc')
-    pset_g.addPrimitive(lambda x: np.nan_to_num(1/np.tan(x), nan=0, posinf=0, neginf=0), 1, name='cot')
-    pset_g.addTerminal(np.e, name='e')  # 添加指数 e
+    pset_g.addPrimitive(np.add, 2, name='Add')
+    pset_g.addPrimitive(np.subtract, 2, name='Sub')
+    pset_g.addPrimitive(np.multiply, 2, name='Mul')
+    pset_g.addPrimitive(real_div, 2, name='Div')
+    pset_g.addPrimitive(np.exp, 1, name='exp')
+    pset_g.addPrimitive(np.sin, 1, name='sin')
+    pset_g.addPrimitive(np.cos, 1, name='cos')
+    pset_g.addPrimitive(np.tan, 1, name='tan')
+    pset_g.addPrimitive(np.abs, 1, name='Abs')
+    pset_g.addPrimitive(real_log, 1, name='log')
+    pset_g.addPrimitive(real_pow, 2, name='Pow')
+    pset_g.addPrimitive(np.tanh, 1, name='tanh')
+    pset_g.addPrimitive(np.sinh, 1, name='sinh')
+    pset_g.addPrimitive(np.cosh, 1, name='cosh')
+    pset_g.addPrimitive(real_arcsin, 1, name='arcsin')
+    pset_g.addPrimitive(real_arccos, 1, name='arccos')
+    pset_g.addPrimitive(np.arctan, 1, name='arctan')
+    pset_g.addPrimitive(lambda x: real_div(1.0, np.cos(x)), 1, name='sec')
+    pset_g.addPrimitive(lambda x: real_div(1.0, np.sin(x)), 1, name='csc')
+    pset_g.addPrimitive(lambda x: real_div(1.0, np.tan(x)), 1, name='cot')
+    pset_g.addTerminal(np.e, name='e')
     pset_g.addTerminal(np.pi, name='pi')
-    pset_g.addEphemeralConstant('C',
-                                sampling_const)
+    pset_g.addEphemeralConstant('C', sampling_const)
 
     pset = (pset_f, pset_g)
-
     return pset_f, pset_g, pset
+
+
 def build_psets_noliner(dim=1):
     # ---------- f -----------------
     pset_f = gp.PrimitiveSet("F", dim, prefix='x')
-
-    pset_f.addPrimitive(lambda x, y: np.nan_to_num(np.add(x, y), nan=0),
-                        2, name='Add')
-    pset_f.addPrimitive(lambda x, y: np.nan_to_num(np.subtract(x, y), nan=0),
-                        2, name='Sub')
-    pset_f.addPrimitive(lambda x, y: np.nan_to_num(np.multiply(x, y), nan=0),
-                        2, name='Mul')
-    pset_f.addPrimitive(lambda x, y: np.nan_to_num(np.divide(x, y), nan=0),
-                        2, name='Div')
-    pset_f.addPrimitive(lambda x: np.nan_to_num(np.exp(x), nan=0),
-                        1, name='exp')
-    pset_f.addPrimitive(lambda x: np.nan_to_num(np.sin(x), nan=0),
-                        1, name='sin')
-    pset_f.addPrimitive(lambda x: np.nan_to_num(np.cos(x), nan=0),
-                        1, name='cos')
-    pset_f.addPrimitive(lambda x: np.nan_to_num(np.tan(x), nan=0),
-                        1, name='tan')
-    pset_f.addPrimitive(lambda x: np.nan_to_num(np.abs(x), nan=0),
-                        1, name='Abs')
-    pset_f.addPrimitive(lambda x: np.nan_to_num(np.log(x), nan=0),
-                        1, name='log')
-    pset_f.addPrimitive(lambda x, y: np.nan_to_num(np.power(x, y), nan=0),
-                       2, name='Pow')
-    pset_f.addPrimitive(lambda x: np.nan_to_num(np.tanh(x), nan=0), 1, name='tanh')
-    pset_f.addPrimitive(lambda x: np.nan_to_num(np.sinh(x), nan=0), 1, name='sinh')
-    pset_f.addPrimitive(lambda x: np.nan_to_num(np.cosh(x), nan=0), 1, name='cosh')
-    # === 互补三角函数 ===
-    pset_f.addPrimitive(lambda x: np.nan_to_num(1 / np.tan(x), nan=0, posinf=0, neginf=0), 1, name='cot')
-    pset_f.addPrimitive(lambda x: np.nan_to_num(1 / np.cos(x), nan=0, posinf=0, neginf=0), 1, name='sec')
-    pset_f.addPrimitive(lambda x: np.nan_to_num(1 / np.sin(x), nan=0, posinf=0, neginf=0), 1, name='csc')
-    pset_f.addPrimitive(lambda x: np.nan_to_num(np.arctan(x), nan=0),
-                        1, name='arctan')
-    pset_f.addPrimitive(lambda x: np.nan_to_num(np.arcsin(x), nan=0),
-                        1, name='arcsin')
-    pset_f.addPrimitive(lambda x: np.nan_to_num(np.arccos(x), nan=0),
-                        1, name='arccos')
-    pset_f.addTerminal(np.e, name='e')  # 添加指数 e
-    pset_f.addTerminal(np.pi, name='pi') #添加常数pi
-    pset_f.addEphemeralConstant('C',
-                                sampling_const)
+    pset_f.addPrimitive(np.add, 2, name='Add')
+    pset_f.addPrimitive(np.subtract, 2, name='Sub')
+    pset_f.addPrimitive(np.multiply, 2, name='Mul')
+    pset_f.addPrimitive(real_div, 2, name='Div')
+    pset_f.addPrimitive(np.exp, 1, name='exp')
+    pset_f.addPrimitive(np.sin, 1, name='sin')
+    pset_f.addPrimitive(np.cos, 1, name='cos')
+    pset_f.addPrimitive(np.tan, 1, name='tan')
+    pset_f.addPrimitive(np.abs, 1, name='Abs')
+    pset_f.addPrimitive(real_log, 1, name='log')
+    pset_f.addPrimitive(real_pow, 2, name='Pow')
+    pset_f.addPrimitive(np.tanh, 1, name='tanh')
+    pset_f.addPrimitive(np.sinh, 1, name='sinh')
+    pset_f.addPrimitive(np.cosh, 1, name='cosh')
+    pset_f.addPrimitive(lambda x: real_div(1.0, np.tan(x)), 1, name='cot')
+    pset_f.addPrimitive(lambda x: real_div(1.0, np.cos(x)), 1, name='sec')
+    pset_f.addPrimitive(lambda x: real_div(1.0, np.sin(x)), 1, name='csc')
+    pset_f.addPrimitive(np.arctan, 1, name='arctan')
+    pset_f.addPrimitive(real_arcsin, 1, name='arcsin')
+    pset_f.addPrimitive(real_arccos, 1, name='arccos')
+    pset_f.addTerminal(np.e, name='e')
+    pset_f.addTerminal(np.pi, name='pi')
+    pset_f.addEphemeralConstant('C', sampling_const)
 
     # ---------- g -----------------
     pset_g = gp.PrimitiveSet("G", int(dim * 2), prefix='x')
-    
-    pset_g.addPrimitive(lambda x, y: np.nan_to_num(np.add(x, y), nan=0),
-                        2, name='Add')
-    pset_g.addPrimitive(lambda x, y: np.nan_to_num(np.subtract(x, y), nan=0),
-                        2, name='Sub')
-    pset_g.addPrimitive(lambda x, y: np.nan_to_num(np.multiply(x, y), nan=0),
-                        2, name='Mul')
-    pset_g.addPrimitive(lambda x, y: np.nan_to_num(np.divide(x, y), nan=0),
-                        2, name='Div')
-    pset_g.addPrimitive(lambda x: np.nan_to_num(np.exp(x), nan=0),
-                        1, name='exp')
-    pset_g.addPrimitive(lambda x: np.nan_to_num(np.sin(x), nan=0),
-                        1, name='sin')
-    pset_g.addPrimitive(lambda x: np.nan_to_num(np.cos(x), nan=0),
-                        1, name='cos')
-    pset_g.addPrimitive(lambda x: np.nan_to_num(np.tan(x), nan=0),
-                        1, name='tan')
-    pset_g.addPrimitive(lambda x: np.nan_to_num(np.abs(x), nan=0),
-                        1, name='Abs')
-    pset_g.addPrimitive(lambda x: np.nan_to_num(np.log(x), nan=0),
-                        1, name='log')
-    pset_g.addPrimitive(lambda x, y: np.nan_to_num(np.power(x, y)),
-                       2, name='Pow')
-    pset_g.addPrimitive(lambda x: np.nan_to_num(np.tanh(x), nan=0), 1, name='tanh')
-    pset_g.addPrimitive(lambda x: np.nan_to_num(np.sinh(x), nan=0), 1, name='sinh')
-    pset_g.addPrimitive(lambda x: np.nan_to_num(np.cosh(x), nan=0), 1, name='cosh')
-    pset_g.addTerminal(np.e, name='e')  # 添加指数 e
+    pset_g.addPrimitive(np.add, 2, name='Add')
+    pset_g.addPrimitive(np.subtract, 2, name='Sub')
+    pset_g.addPrimitive(np.multiply, 2, name='Mul')
+    pset_g.addPrimitive(real_div, 2, name='Div')
+    pset_g.addPrimitive(np.exp, 1, name='exp')
+    pset_g.addPrimitive(np.sin, 1, name='sin')
+    pset_g.addPrimitive(np.cos, 1, name='cos')
+    pset_g.addPrimitive(np.tan, 1, name='tan')
+    pset_g.addPrimitive(np.abs, 1, name='Abs')
+    pset_g.addPrimitive(real_log, 1, name='log')
+    pset_g.addPrimitive(real_pow, 2, name='Pow')
+    pset_g.addPrimitive(np.tanh, 1, name='tanh')
+    pset_g.addPrimitive(np.sinh, 1, name='sinh')
+    pset_g.addPrimitive(np.cosh, 1, name='cosh')
+    pset_g.addTerminal(np.e, name='e')
     pset_g.addTerminal(np.pi, name='pi')
-    pset_g.addEphemeralConstant('C',
-                                sampling_const)
+    pset_g.addEphemeralConstant('C', sampling_const)
 
+    # ---------- s -----------------
     pset_s = gp.PrimitiveSet("S", int(dim), prefix='x')
-    # for i in range(dim * 2):
-    #     xi = f"x{i}"
-    #     pset_g.addPrimitive(lambda c, x: c * x, 2, name=f"{xi}_weighted")
-    #     pset_g.addTerminal(i, name=xi)
-    pset_s.addPrimitive(lambda x, y: np.nan_to_num(np.add(x, y), nan=0),
-                        2, name='Add')
-    pset_s.addPrimitive(lambda x, y: np.nan_to_num(np.subtract(x, y), nan=0),
-                        2, name='Sub')
-    pset_s.addPrimitive(lambda x, y: np.nan_to_num(np.multiply(x, y), nan=0),
-                        2, name='Mul')
-    pset_s.addPrimitive(lambda x, y: np.nan_to_num(np.divide(x, y), nan=0),
-                        2, name='Div')
-    pset_s.addPrimitive(lambda x: np.nan_to_num(np.exp(x), nan=0),
-                        1, name='exp')
-    pset_s.addPrimitive(lambda x: np.nan_to_num(np.sin(x), nan=0),
-                        1, name='sin')
-    pset_s.addPrimitive(lambda x: np.nan_to_num(np.cos(x), nan=0),
-                        1, name='cos')
-    pset_s.addPrimitive(lambda x: np.nan_to_num(np.tan(x), nan=0),
-                        1, name='tan')
-    pset_s.addPrimitive(lambda x: np.nan_to_num(np.abs(x), nan=0),
-                        1, name='Abs')
-    pset_s.addPrimitive(lambda x: np.nan_to_num(np.log(x), nan=0),
-                        1, name='log')
-    pset_s.addPrimitive(lambda x, y: np.nan_to_num(np.power(x, y)),
-                        2, name='Pow')
-    pset_s.addPrimitive(lambda x: np.nan_to_num(np.tanh(x), nan=0), 1, name='tanh')
-    pset_s.addPrimitive(lambda x: np.nan_to_num(np.sinh(x), nan=0), 1, name='sinh')
-    pset_s.addPrimitive(lambda x: np.nan_to_num(np.cosh(x), nan=0), 1, name='cosh')
-    pset_s.addTerminal(np.e, name='e')  # 添加指数 e
+    pset_s.addPrimitive(np.add, 2, name='Add')
+    pset_s.addPrimitive(np.subtract, 2, name='Sub')
+    pset_s.addPrimitive(np.multiply, 2, name='Mul')
+    pset_s.addPrimitive(real_div, 2, name='Div')
+    pset_s.addPrimitive(np.exp, 1, name='exp')
+    pset_s.addPrimitive(np.sin, 1, name='sin')
+    pset_s.addPrimitive(np.cos, 1, name='cos')
+    pset_s.addPrimitive(np.tan, 1, name='tan')
+    pset_s.addPrimitive(np.abs, 1, name='Abs')
+    pset_s.addPrimitive(real_log, 1, name='log')
+    pset_s.addPrimitive(real_pow, 2, name='Pow')
+    pset_s.addPrimitive(np.tanh, 1, name='tanh')
+    pset_s.addPrimitive(np.sinh, 1, name='sinh')
+    pset_s.addPrimitive(np.cosh, 1, name='cosh')
+    pset_s.addTerminal(np.e, name='e')
     pset_s.addTerminal(np.pi, name='pi')
-    pset_s.addEphemeralConstant('C',
-                                sampling_const)
+    pset_s.addEphemeralConstant('C', sampling_const)
 
     pset = (pset_f, pset_g, pset_s)
-
     return pset_f, pset_g, pset_s, pset
-
-pset_f, pset_g, pset = build_psets(Dim)
-pset_f1, pset_g1, pset_s1, pset1 = build_psets_noliner(Dim)
 
 converter = {
     'Sub': lambda x, y: x - y,
@@ -504,7 +646,8 @@ converter = {
     'log': lambda x: sp.log(x),
     'Abs': lambda x: sp.Abs(x)
 }
-
+pset_f, pset_g, pset = build_psets(Dim)
+pset_f1, pset_g1, pset_s1, pset1 = build_psets_noliner(Dim)
 
 # used to save the complexity of searched equations
 
